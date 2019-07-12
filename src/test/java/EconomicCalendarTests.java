@@ -4,6 +4,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.testng.ScreenShooter;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import logger.TestNgListener;
 import logger.WebDriverListener;
@@ -42,6 +43,7 @@ public class EconomicCalendarTests extends AbstractTestNGCucumberTests {
 
   @BeforeClass
   public void setPrefs() {
+    WebDriverManager.chromedriver().setup();
     SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     Configuration.browserVersion = "75";
     Configuration.browser = "chrome";

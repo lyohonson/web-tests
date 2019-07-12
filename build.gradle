@@ -30,12 +30,13 @@ dependencies {
     compile "io.qameta.allure:allure-cucumber4-jvm:${allureVersion}"
     compile "org.apache.logging.log4j:log4j-core:2.12.0"
     compile "org.apache.logging.log4j:log4j-slf4j-impl:2.12.0"
-    compile group: 'org.apache.logging.log4j', name: 'log4j-iostreams', version: '2.12.0'
+    compile "org.apache.logging.log4j:log4j-iostreams:2.12.0"
     compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     compile "io.rest-assured:rest-assured:${restAssuredVersion}"
     compile "io.qameta.allure:allure-rest-assured:${allureRestAssuredVersion}"
     compile "org.testng:testng:6.14.3"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testCompile "io.github.bonigarcia:webdrivermanager:3.6.1"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     testCompile "io.cucumber:cucumber-testng:${cucumberVersion}"
