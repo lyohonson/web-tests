@@ -44,6 +44,7 @@ public class EconomicCalendarTests extends AbstractTestNGCucumberTests {
   public void setPrefs() {
     SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     Configuration.browserVersion = "75";
+    Configuration.browser = "chrome";
 
     ChromeOptions options = new ChromeOptions();
     options.addArguments("user-agent=Mozilla/5.0"
