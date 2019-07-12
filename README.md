@@ -8,4 +8,5 @@ To run tests:
  - On Linux/MacOs in command line run "./gradlew test -Dselenide.baseUrl=BASE_URL"
 
 Allure reports will be generated automatically and opened in default browser after build.
+
 Log files will be in build/test-results/logs/ path.

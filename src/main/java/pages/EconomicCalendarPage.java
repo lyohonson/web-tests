@@ -37,13 +37,11 @@ public class EconomicCalendarPage extends PageBase {
     return getBaseUrl() + "/" + ECONOMIC_CALENDAR_URL;
   }
 
-  @Step
   public EconomicCalendarPage filterByCurrentMonth() {
     $x(FILTERDATE_CURRENT_MONTH).shouldBe(Condition.visible).click();
     return this;
   }
 
-  @Step
   public EconomicCalendarPage filterByImportance(List<String> importanceList) {
     List<CheckBox> checkBoxesImportance = CheckBox.getAllCheckBoxesContains("filterImportance");
 

@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,9 +33,19 @@ public class EconomicCalendarStepdefs {
     page.filterByCurrency(currencyList);
   }
 
+  @When("filter by currencies {string}")
+  public void filterByCurrencies(String currency) {
+    page.filterByCurrency(Arrays.asList(currency));
+  }
+
   @When("filter by importance")
-  public void filterByImportance(List<String> importanceList) {
-    page.filterByImportance(importanceList);
+  public void filterByImportance(List<String> importance) {
+    page.filterByImportance(importance);
+  }
+
+  @When("filter by importance {string}")
+  public void filterByImportance(String importance) {
+    page.filterByImportance(Arrays.asList(importance));
   }
 
   @Then("^check country (.*)$")

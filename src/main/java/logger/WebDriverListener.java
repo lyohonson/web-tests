@@ -74,7 +74,7 @@ public class WebDriverListener implements WebDriverEventListener {
 
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
-    LOG.info("Is going to click on element " + element);
+    LOG.debug("Is going to click on element " + element);
   }
 
   public void afterClickOn(WebElement element, WebDriver driver) {
