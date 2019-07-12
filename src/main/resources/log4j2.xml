@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error">
+  <Properties>
+    <Property name="log-path">build/test-results/logs</Property>
+    <Property name="LOG">FILE</Property>
+  </Properties>
+
+  <Appenders>
+    <RollingFile name="FILE" fileName="${log-path}/test-logs.log"
+      filePattern="${log-path}/test-logs-%d{yyyy-MM-dd}.log">
+      <PatternLayout>
+        <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+      </Policies>
+    </RollingFile>
+
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Root level="info" additivity="false">
+<!--      <appender-ref ref="STDOUT"/>-->
+      <appender-ref ref="FILE"/>
+    </Root>
+  </Loggers>
+</Configuration>

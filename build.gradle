@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.7.0"
+}
+
+group 'test.task'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def allureVersion = "2.12.1"
+def cucumberVersion = "4.5.3"
+def assertjVersion = "3.11.1"
+def jacksonVersion = "2.9.6"
+def lombokVersion = "1.18.8"
+def aspectjVersion = "1.9.4"
+def restAssuredVersion = "3.3.0"
+def allureRestAssuredVersion = "2.10.0"
+
+
+dependencies {
+    compile "io.cucumber:cucumber-java:${cucumberVersion}"
+    compile "org.assertj:assertj-core:${assertjVersion}"
+    compile "com.codeborne:selenide:5.2.3"
+    compile "io.qameta.allure:allure-selenide:${allureVersion}"
+    compile "io.qameta.allure:allure-cucumber4-jvm:${allureVersion}"
+    compile "org.apache.logging.log4j:log4j-core:2.12.0"
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:2.12.0"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-iostreams', version: '2.12.0'
+    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compile "io.rest-assured:rest-assured:${restAssuredVersion}"
+    compile "io.qameta.allure:allure-rest-assured:${allureRestAssuredVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompile "org.slf4j:slf4j-simple:1.7.25"
+    testCompile "io.cucumber:cucumber-testng:${cucumberVersion}"
+    compile "org.testng:testng:6.14.3"
+}
+
+allure {
+    aspectjweaver = true
+    autoconfigure = false
+    version = "${allureVersion}"
+    aspectjVersion = "${aspectjVersion}"
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+test {
+
+    dependsOn assemble, compileTestJava
+
+    minHeapSize = "512m"
+    maxHeapSize = "1024m"
+
+    def baseUrl = System.properties["selenide.baseUrl"]
+    if (baseUrl) systemProperty 'selenide.baseUrl', baseUrl
+
+
+    println "-------------------------------------------------------------"
+    println "Service base url : " + System.getProperty("selenide.baseUrl")
+    println "-------------------------------------------------------------"
+
+    useTestNG() {
+        reports.html.enabled = false
+        useDefaultListeners = false
+        scanForTestClasses = false
+    }
+
+    testLogging.showStandardStreams = true
+    finalizedBy("downloadAllure")
+    finalizedBy("allureServe")
+}
