@@ -7,9 +7,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pages.EconomicCalendarPage;
 
 public class EconomicCalendarStepdefs {
+  private static final Logger LOG = LogManager.getLogger(EconomicCalendarStepdefs.class);
+
 
   EconomicCalendarPage page;
 
@@ -18,7 +22,7 @@ public class EconomicCalendarStepdefs {
     page = open(new EconomicCalendarPage().getUrl(), EconomicCalendarPage.class);
   }
 
-  @When("^filter by current month")
+  @When("filter by current month")
   public void filterByCurrentMonth() {
     page.filterByCurrentMonth();
   }

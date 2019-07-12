@@ -16,10 +16,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 
 @CucumberOptions(
-    features = {"src/test/resources/features"}, glue = {"stepdefs"},
-    plugin = {"pretty",
+    features = {"src/test/resources/features"},
+    glue = {"stepdefs"},
+    plugin = {
+        "pretty",
         "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm",
-    "json:build/report.json"}
+        "json:build/report.json"}
 )
 @Listeners({ScreenShooter.class, TestNgListener.class})
 public class EconomicCalendarTests extends AbstractTestNGCucumberTests {
