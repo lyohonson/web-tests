@@ -56,15 +56,15 @@ public class CucumberStepsToLog implements ConcurrentEventListener {
 
   private void handleFeatureStartedHandler(final TestSourceRead event) {
     testSources.addTestSourceReadEvent(event.uri, event);
-    LOG.info("Feature {} tests started", event.uri);
+    LOG.info("Tests for feature {} started", event.uri);
   }
 
   private void handleTestCaseStarted(final TestCaseStarted event) {
-    LOG.info("Test case " + event.testCase.getName() + " started");
+    LOG.info("Test \"" + event.testCase.getName() + "\" started");
   }
 
   private void handleTestCaseFinished(final TestCaseFinished event) {
-    LOG.info("Test case \"" + event.testCase.getName() + " finished with result \"" + event.result.getStatus());
+    LOG.info("Test \"" + event.testCase.getName() + "\" finished with result " + event.result.getStatus());
   }
 
   private void handleTestStepStarted(final TestStepStarted event) {
@@ -78,14 +78,14 @@ public class CucumberStepsToLog implements ConcurrentEventListener {
       final StepResult stepResult = new StepResult()
           .setName(String.format("%s %s", stepKeyword, pickleStep.getPickleStep().getText()))
           .setStart(System.currentTimeMillis());
-      LOG.info("Test " + pickleStep.getStepText() + " started");
+      LOG.info("Step \"" + pickleStep.getStepText() + "\" started");
     }
   }
 
   private void handlePickleStep(final TestStepFinished event) {
     final PickleStepTestStep pickleStep = (PickleStepTestStep) event.testStep;
     Type status = event.result.getStatus();
-    LOG.info( "Step " + pickleStep.getStepText() + " " + status.toString());
+    LOG.info( "Step \"" + pickleStep.getStepText() + "\" " + status.toString());
 
   }
 

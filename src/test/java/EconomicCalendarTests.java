@@ -17,7 +17,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
-import logger.CucumberStepsToLog;
 
 @CucumberOptions(
     features = {"src/test/resources/features"},
@@ -35,7 +34,7 @@ public class EconomicCalendarTests extends AbstractTestNGCucumberTests {
   private static final Logger LOG = LogManager.getLogger(EconomicCalendarTests.class);
 
   @Override
-  @DataProvider(parallel = false)
+  @DataProvider
   public Object[][] scenarios() {
     return super.scenarios();
   }
@@ -51,6 +50,7 @@ public class EconomicCalendarTests extends AbstractTestNGCucumberTests {
     ChromeOptions options = new ChromeOptions();
     options.addArguments("user-agent=Mozilla/5.0"
         + " (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+    options.addArguments("--start-maximized");
     EventFiringWebDriver evenHandler = new EventFiringWebDriver(new ChromeDriver(options));
     evenHandler.register(new WebDriverListener());
     WebDriverRunner.setWebDriver(evenHandler);
